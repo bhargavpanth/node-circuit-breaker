@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha || test",
-    "build": "NODE_ENV=development && npx babel src -d build",
+    "build": "NODE_ENV=development && npx babel src --out-dir build",
     "clean": "rm -rf build/"
   },
   "author": "@bhargavpanth",
@@ -16,5 +16,9 @@
     "babel-register": "^6.26.0",
     "chai": "^4.1.2",
     "mocha": "^5.1.0"
+  },
+  "dependencies": {
+    "babel-preset-env": "^1.6.1",
+    "node-fetch": "^2.1.2"
   }
 }
