@@ -7,10 +7,22 @@ import fetch from 'node-fetch';
 let env = process.env.NODE_ENV = 'test';
 
 export default class circuit_breaker{
-	// default timeout wait time is set to 10 unless explicitly mentioned
-	handle(request, url, timeout = 10){
+
+	// default wait timeout is set to 10 unless explicitly mentioned
+	constructor(request, url, timeout = 10){
+		this.request = request;
+		this.url = url;
+		this.timeout = timeout;
+	}
+
+	handle(){
 		new Promise( (resolve, reject) => {
-			fetch(url).then()
+		//  
+			fetch(this.url)
+				.then()
+				.catch();
+		
 		});
 	}
+
 }
