@@ -4,7 +4,6 @@ var assert = chai.assert;
 
 describe('perform sanity checks on dev environment', () => {
 	it('check if NODE_ENV is set to dev', () => {
-		// console.log(process.env.NODE_ENV);
-		assert.equal(process.env.NODE_ENV, undefined);
+		assert.equal(env.process.env.NODE_ENV, undefined);
 	});
 });
