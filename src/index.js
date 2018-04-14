@@ -2,34 +2,39 @@
 Capture response and check for a timeout
 */
 
-import fetch from 'node-fetch';
+// import fetch from 'node-fetch';
+import request from 'request';
 
-let env = process.env.NODE_ENV = 'test';
+// let env = process.env.NODE_ENV = 'test';
 
-class circuit_breaker{
+export default class circuit_breaker{
 
 	// default wait timeout is set to 10 unless explicitly mentioned
 	constructor(url, timeout = 10){
-		// this.request = request;
 		this.url = url;
 		this.timeout = timeout;
-	}
+	};
 
-	handle(){
-		new Promise( (resolve, reject) => {
-		// 
-			fetch(this.url)
-				.then(res => {
-					resolve(res);
-				})
-				.catch(err => {
-					// error in response
-					reject(err);
-				});
-		
+	fetch(){
+
+	};
+
+	wait(){
+
+	};
+
+	handle() {
+		// hit a request and start a setTimeout function
+		return new Promise( (resolve, reject) => {
+			if () {
+				// request is successful and returns within this.timeout
+				resolve();
+			} else {
+				// request has timed out or service is down
+				reject();
+				// handle closing the circuit here
+			}
 		});
-	}
+	};
 
-}
-
-export default circuit_breaker;
+};

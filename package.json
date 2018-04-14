@@ -19,6 +19,7 @@
     "mocha": "^5.1.0"
   },
   "dependencies": {
-    "node-fetch": "^2.1.2"
+    "node-fetch": "^2.1.2",
+    "request": "^2.85.0"
   }
 }
