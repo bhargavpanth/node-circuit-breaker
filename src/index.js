@@ -6,7 +6,7 @@ import fetch from 'node-fetch';
 
 let env = process.env.NODE_ENV = 'test';
 
-export default class circuit_breaker{
+class circuit_breaker{
 
 	// default wait timeout is set to 10 unless explicitly mentioned
 	constructor(url, timeout = 10){
@@ -31,3 +31,5 @@ export default class circuit_breaker{
 	}
 
 }
+
+export default circuit_breaker;
