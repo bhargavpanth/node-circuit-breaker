@@ -14,34 +14,31 @@ class circuit_breaker{
 		this.timeout = timeout;
 	};
 
-	fetch(){
-		return new Promise( (resolve, reject) => {
-			request(this.url);
+	handle() {
+		
+		let req = new Promise( (resolve, reject) => {
+			fetch(this.url);
 		});
-	};
 
-	wait(){
 		let timeout = new Promise( (resolve, reject) => {
 			let time = setTimeout(() => {
 				clearTimeout(time);
 				reject('request timed out at ' + this.timeout + ' seconds');
 			});
 		});
-
-		return Promise.race([promise, timeout]);
-	};
-
-	handle() {
 		// hit a request and start a setTimeout function
-		return new Promise.race([this.fetch, this.wait]) 
+		
+		Promise.race([req, timeout]).then( () => {
+			console.log(`Response`);
+		}).catch( () => {
+			console.log(`Unable to fetch the request on time - setting circuit breaker`);
+		});
+	
 	};
 
 };
 
-
-// instantiate an object
-
-let test_ob = new circuit_breaker('http://github.com/', 3);
-console.log(test_ob.handle());
+let test = new circuit_breaker('http://github.com', 10)
+test.handle();
 
 export default circuit_breaker;
