@@ -3,6 +3,7 @@ var chai = require('chai');
 var assert = chai.assert;
 var cb = require('../build/circuit_breaker').default;
 
+// Object.getOwnPropertyNames()
 console.log(Object.keys(cb));
 console.log(cb);
 console.log(cb.circuit_breaker('http://github.com', 10));

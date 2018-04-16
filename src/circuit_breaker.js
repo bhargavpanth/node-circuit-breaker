@@ -38,4 +38,10 @@ class circuit_breaker{
 
 };
 
+
+// instantiate an object
+
+let test_ob = new circuit_breaker('http://github.com/', 3);
+console.log(test_ob.handle());
+
 export default circuit_breaker;
