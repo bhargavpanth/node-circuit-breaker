@@ -4,6 +4,8 @@ Capture response and check for a timeout
 
 import fetch from 'node-fetch';
 
+import request from 'request';
+
 // let env = process.env.NODE_ENV = 'test';
 
 class circuit_breaker{
@@ -17,7 +19,11 @@ class circuit_breaker{
 	handle() {
 		
 		let req = new Promise( (resolve, reject) => {
-			fetch(this.url);
+			fetch(this.url).then((data) => {
+				resolve(data);
+			}).catch((err) => {
+				reject(err);
+			});
 		});
 
 		let timeout = new Promise( (resolve, reject) => {
@@ -38,7 +44,7 @@ class circuit_breaker{
 
 };
 
-let test = new circuit_breaker('http://github.com', 10)
+let test = new circuit_breaker('https://github.com', 1000)
 test.handle();
 
 export default circuit_breaker;
