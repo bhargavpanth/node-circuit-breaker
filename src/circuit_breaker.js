@@ -21,7 +21,7 @@ class circuit_breaker{
 			fetch(this.url)
 
 			.then((data) => {
-				resolve(data);
+				resolve(`Request going through fine`);
 			})
 			
 			.catch((err) => {
@@ -33,15 +33,17 @@ class circuit_breaker{
 		let timeout = new Promise( (resolve, reject) => {
 			let time = setTimeout(() => {
 				clearTimeout(time);
-				resolve('request timed out after ' + this.timeout + ' seconds');
+				resolve(`request timed out after ` + this.timeout + ` seconds`);
 				/* close the circuit and set a flag to indicate the service is down */
 			}, this.timeout);
 		})
 		
 
 		// hit a request and start a setTimeout function
-		Promise.race([req, timeout]).then( (val) => {
-			console.log(`Response ${val}`);
+		Promise.race([req, timeout])
+
+		.then( (res) => {
+			console.log(`${res}`);
 		});
 	
 	};
