@@ -6,7 +6,8 @@
   "scripts": {
     "test": "mocha || test",
     "build": "NODE_ENV=development && npx babel src -d build",
-    "clean": "rm -rf build/"
+    "clean": "rm -rf build/",
+    "start": "node build/circuit_breaker.js"
   },
   "author": "@bhargavpanth",
   "license": "ISC",
