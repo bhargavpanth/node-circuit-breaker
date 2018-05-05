@@ -17,7 +17,8 @@ class circuit_breaker{
 
 	handle() {
 		/* Promise - request */
-		let req = new Promise( (resolve, reject) => {	
+		let req = new Promise( (resolve, reject) => {
+			console.log(this.url);
 			fetch(this.url)
 
 			.then((data) => {
@@ -33,13 +34,13 @@ class circuit_breaker{
 		let timeout = new Promise( (resolve, reject) => {
 			let time = setTimeout(() => {
 				clearTimeout(time);
-				resolve(`request timed out after ` + this.timeout + ` seconds`);
+				reject(`request timed out after ${this.timeout}  milliseconds`);
 				/* close the circuit and set a flag to indicate the service is down */
 			}, this.timeout);
-		})
+		});
 		
 
-		// hit a request and start a setTimeout function
+		/* Promise race condition */
 		Promise.race([req, timeout])
 
 		.then( (res) => {
@@ -50,6 +51,6 @@ class circuit_breaker{
 
 };
 
-let test = new circuit_breaker('https://github.com', 5000).handle();
+let test = new circuit_breaker('https://bhargavrpanth.com', 5000).handle();
 
 export default circuit_breaker;
