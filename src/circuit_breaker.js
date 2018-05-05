@@ -38,7 +38,6 @@ class circuit_breaker{
 				/* close the circuit and set a flag to indicate the service is down */
 			}, this.timeout);
 		});
-		
 
 		/* Promise race condition */
 		Promise.race([req, timeout])
