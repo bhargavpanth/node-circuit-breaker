@@ -10,6 +10,7 @@ describe('checks for circuit_breaker ', () => {
 
 	it('should pass the test within 5 seconds', () => {
 		let test = new circuit_breaker('https://github.com', 5000).handle();
+		assert.equal(test, Object)
 	});
 
 });
