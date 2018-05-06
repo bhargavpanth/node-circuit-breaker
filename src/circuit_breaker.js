@@ -40,7 +40,7 @@ class circuit_breaker{
 		});
 
 		/* Promise race condition */
-		Promise.race([req, timeout])
+		let race = Promise.race([req, timeout])
 
 		.then( (res) => {
 			console.log(`${res}`);
@@ -49,11 +49,13 @@ class circuit_breaker{
 		.catch( (err) => {
 			console.log(`${err}`);
 		});
+
+		return race;
 	
 	};
 
 };
 
-let test = new circuit_breaker('https://bhargavrpanth.com', 5000).handle();
+// let test = new circuit_breaker('https://bhargavrpanth.com', 5000).handle();
 
 export default circuit_breaker;
